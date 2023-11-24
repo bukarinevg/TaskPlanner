@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - '8080:80'
+    volumes:
+      # - ./:/app
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      
+  php-fpm:
+    image: php:8-fpm
+    volumes:
+      - ./:/app
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=planner
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8888:80'
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - UPLOAD_MAX_FILESIZE=20M
+      - POST_MAX_SIZE=20M
+      - UPLOAD_LIMIT=300M
+      - PHP_UPLOAD_MAX_FILESIZE=300M
+      - PHP_POST_MAX_SIZE=300M
+    depends_on:
+      - mysql
+  
