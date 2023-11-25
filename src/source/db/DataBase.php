@@ -8,7 +8,6 @@ namespace app\source\db;
  * It supports multiple database drivers.
  */
 class DataBase  {
-    use QueryBuilder;
 
     /**
      * @var array $config The configuration array containing the database connection details.
@@ -17,7 +16,7 @@ class DataBase  {
     /**
      * @var DBConnection $db The database connection object.
      */
-    private $db;
+    public $db;
 
     /**
      * DataBase constructor.
@@ -62,7 +61,6 @@ class DataBase  {
     private function setDataBaseConnection(DBConnection $DBConnection) {
         $this->db = $DBConnection->getConnection();
     }
-
 
 }
   

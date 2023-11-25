@@ -21,11 +21,9 @@ final class CreateTaskTable extends AbstractMigration
     {
             
         $this->table('task')
-            ->addColumn('name', 'string', ['limit' => 255])
-            ->addColumn('description', 'text')
-            ->addColumn('status', 'integer', ['default' => 0])
+            ->addColumn('code', 'string', ['limit' => 255])
+            ->addColumn('time_to_run', 'text')
             ->addColumn('created_at', 'datetime')
-            ->addColumn('updated_at', 'datetime')
             ->create();
 
     }

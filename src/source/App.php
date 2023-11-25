@@ -16,8 +16,6 @@ class App
         $this->config = $config;
         
     }
-
-
     public function run()
     {
         $this->setDb(new DataBase($this->config['components']['db'])); 
@@ -61,7 +59,7 @@ class App
      */ 
     public function setDb(DataBase $db)
     {
-        $this->db = $db;
+        $this->db = $db->db;
 
         return $this;
     }

@@ -20,11 +20,8 @@ final class CreateTicketTable extends AbstractMigration
     public function change(): void
     {
         $this->table('ticket')
-        ->addColumn('name', 'string', ['limit' => 255])
-        ->addColumn('description', 'text')
-        ->addColumn('status', 'integer', ['default' => 0])
-        ->addColumn('created_at', 'datetime')
-        ->addColumn('updated_at', 'datetime')
-        ->create();
+            ->addColumn('name', 'string', ['limit' => 255])
+            ->addColumn('created_at', 'datetime')
+            ->create();
     }
 }

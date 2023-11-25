@@ -22,7 +22,7 @@ class PostgreSQLConnection  extends BaseDBConnection implements DBConnection
 
         try {
             $this->connection = new PDO(
-                'mysql:host=' . $this->host . ';dbname=' . $this->db_name,
+                'pssql:host=' . $this->host . ';dbname=' . $this->db_name,
                 $this->username,
                 $this->password
             );
