@@ -14,9 +14,13 @@ after number of minutes the string will be moved to ticket table.
 ## Installation
 
 1. Clone the repository.
-2. Docker is required to run the application. If you don't have Docker installed, 
+2. Run the following command to install the dependencies:
+    ```bash
+    composer install
+    ```
+3. Docker is required to run the application. If you don't have Docker installed, 
 you can download it [here](https://www.docker.com/products/docker-desktop).
-3. Run the following command to build the Docker image:
+4. Run the following command to build the Docker image:
     ```bash 
     docker-compose up --build
     ```
