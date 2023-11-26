@@ -1,28 +1,51 @@
 <?php
 namespace app\source;
 
-use app\source\db\DataBase;
+
 use app\source\http\RequestHandler;
 use app\source\http\UrlRouting;
 
+/**
+ * This is the main application class.
+ */
 class App
 {
+    /**
+     * @var array $config The application configuration.
+     */
     private $config;
-    private $db;
+
+
+    /**
+     * @var mixed $request The request object.
+     */
     private $request;
 
+    /**
+     * App constructor.
+     *
+     * @param array $config The configuration options for the App.
+     */
     function __construct($config )
     {
         $this->config = $config;
         
     }
+
+    /**
+     * Runs the application.
+     */
     public function run()
     {
-        $this->setDb(new DataBase($this->config['components']['db'])); 
         $this->setRequest(new RequestHandler());
         $this->callController((new UrlRouting())->getController() );        
     }
 
+    /**
+     * Calls the controller and method from the URL.
+     *
+     * @param array $route An array containing the controller and method.
+     */
     public function callController($route)
     {
         try {
@@ -43,27 +66,6 @@ class App
             echo 'Error: ' . $e->getMessage();
         }
     }
-
-    /**
-     * Get the value of db
-     */ 
-    public function getDb()
-    {
-        return $this->db;
-    }
-
-    /**
-     * Set the value of db
-     *
-     * @return  self
-     */ 
-    public function setDb(DataBase $db)
-    {
-        $this->db = $db->db;
-
-        return $this;
-    }
-
 
     /**
      * Get the value of request

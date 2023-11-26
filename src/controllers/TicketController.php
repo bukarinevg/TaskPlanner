@@ -20,7 +20,7 @@ class TicketController  extends \app\source\controller\AbstractController{
         $minutes = $data['min'];
         $code = $data['code']; 
 
-        $job = new Task($this->app->getDb());
+        $job = new Task();
         $job->create( $code, $minutes);
     }
 

@@ -1,32 +1,23 @@
 
 <?php
-date_default_timezone_set('Asia/Tel_Aviv');
+require_once 'vendor/autoload.php';
+
+use app\source\db\DataBase;
+
 $config = require_once 'config/config.php';
-$name = 'test';
-// MySQL database credentials
-$name = 'test';
-$host = $config['components']['db']['host'];   
-$db_name = $config['components']['db']['db_name'];   
-$username = $config['components']['db']['username'];
-$password = $config['components']['db']['password'];
+$pdo =  (new DataBase($config['components']['db']))->db;
 
-$dsn = "mysql:host={$host};dbname={$db_name}";
-
-try {
-    // Create a PDO instance
-    $pdo = new PDO($dsn, $username, $password);
-
-} catch (PDOException $e) {
-    // Handle connection errors
-    echo "Connection failed: " . $e->getMessage();
-}
-
+/**
+ * Finds active a task in the database.
+ *
+ * @param PDO $pdo The PDO object representing the database connection.
+ * @return mixed The task data if found, or false if not found.
+ */
 function findTask($pdo){
     $query = $pdo->prepare("select * from task");
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach($result as $row) {
-      // $row['time_to_run'] = new DateTime($row['time_to_run']); 
       if($row['time_to_run'] == date('Y-m-d H:i')){
         addTicket($pdo, $row['code']);
         deleteTask($pdo, $row['id']);
@@ -34,11 +25,31 @@ function findTask($pdo){
     }
 }
 
-function addTicket($pdo, $name){
-       // Set PDO to throw exceptions on errors
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Example: Perform a query (select version of MySQL)
+/**
+ * Deletes a task from the database.
+ *
+ * @param PDO $pdo The PDO object representing the database connection.
+ * @param int $id The ID of the task to be deleted.
+ * @return void
+ */
+function deleteTask($pdo, $id){
+    $query = $pdo->prepare("DELETE FROM task WHERE id = :id");
+    $query->execute([
+        'id' => $id,
+    ]);
+}
+
+
+/**
+ * Adds a ticket to the database.
+ *
+ * @param PDO $pdo The PDO object representing the database connection.
+ * @param string $name The name of the ticket.
+ * @return void
+ */
+function addTicket($pdo, $name){
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query = $pdo->prepare("INSERT INTO ticket (name, created_at) VALUES (:name, :created_at)");
     $query->execute([
         'name' => $name,
@@ -46,12 +57,7 @@ function addTicket($pdo, $name){
     ]);
 }
 
-function deleteTask($pdo, $id){
-    $query = $pdo->prepare("DELETE FROM task WHERE id = :id");
-    $query->execute([
-        'id' => $id,
-    ]);
-}
+
 
 
 findTask($pdo);

@@ -7,7 +7,7 @@ use PDOException;
  * Class MySQLConnection
  *
  * This class is responsible for establishing and managing a connection to a MySQL database.
- * It implements the DBConnection interface.
+ * It extends the BaseDBConnection class and implements the DBConnection interface.
  */
 class MySQLConnection  extends BaseDBConnection implements DBConnection
 {
@@ -26,10 +26,10 @@ class MySQLConnection  extends BaseDBConnection implements DBConnection
                 $this->password
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->connection;
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
         }
-        return $this->connection;
     }
 }
 

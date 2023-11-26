@@ -3,6 +3,13 @@ namespace app\source\http;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class RequestHandler
+ * 
+ * This class handles HTTP requests.
+ * Based on the Symfony HttpFoundation component.
+ * PSR-7 compatible.
+ */
 class RequestHandler {
 
     private $request;

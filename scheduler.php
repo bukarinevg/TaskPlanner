@@ -1,7 +1,12 @@
-<?php require_once 'vendor/autoload.php';
 
+<?php 
+/**
+ * This is the script that will be executed by the cron job.
+ */
+require_once 'vendor/autoload.php';
 use GO\Scheduler;
-date_default_timezone_set('Asia/Tel_Aviv');
+
+
 $scheduler = new Scheduler();
 $scheduler->php('/var/www/html/script.php')->everyMinute();
 $scheduler->run();

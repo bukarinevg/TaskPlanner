@@ -1,4 +1,7 @@
 <?php
+/**
+ * Migrations configuration
+ */
 
 return
 [

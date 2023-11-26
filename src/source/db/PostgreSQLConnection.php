@@ -27,11 +27,11 @@ class PostgreSQLConnection  extends BaseDBConnection implements DBConnection
                 $this->password
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->connection;
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
         }
 
-        return $this->connection;
     }
 }
 
