@@ -44,16 +44,22 @@ class DataBase  {
      */
     private function connect(): bool|\Exception {
         $driver = $this->config['driver'];
+        $dbArguments = array_values([
+            'host' => $this->config['host'],
+            'db_name' => $this->config['db_name'],
+            'username' => $this->config['username'],
+            'password' => $this->config['password']
+        ]);
 
         switch ($driver) {
             case 'mysql':
-                $connection = new MySQLConnection($this->config);
+                $connection = new MySQLConnection(...$dbArguments);
                 break;
             case 'pgsql':
-                $connection = new PostgreSQLConnection($this->config);
+                $connection = new PostgreSQLConnection(...$dbArguments);
                 break;
             case 'sqlite':
-                $connection = new MSSQLConnection($this->config);
+                $connection = new MSSQLConnection(...$dbArguments);
                 break;
             // Add more cases for other supported drivers
 
@@ -69,8 +75,8 @@ class DataBase  {
      *
      * @param DBConnectionInterface $DBConnectionInterface The database connection object.
      */
-    private function setDataBaseConnection(DBConnectionInterface $DBConnectionInterface): bool|\Exception {
-        return $this->db = $DBConnectionInterface->getConnection() ? true : throw new \Exception("Error connecting to the database.");
+    private function setDataBaseConnection(DBConnectionInterface $DBConnectionInterface): \PDO|\Exception {
+        return $this->db = $DBConnectionInterface->getConnection() ??  throw new \Exception("Error connecting to the database.");
     }
 
 }

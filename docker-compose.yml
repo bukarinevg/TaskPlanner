@@ -40,3 +40,8 @@ services:
     depends_on:
       - mysql
     restart: no
+    
+  doc:
+    image: phpdoc/phpdoc:3
+    volumes:
+      - ./:/data
