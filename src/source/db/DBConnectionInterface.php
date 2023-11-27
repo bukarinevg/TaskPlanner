@@ -8,7 +8,7 @@ namespace app\source\db;
  * @param array $condition The condition(s) that must be met for a row to be deleted.
  * @return string The constructed SQL query.
  */
-interface DBConnection{
+interface DBConnectionInterface{
     /**
      * Establishes a connection to the database.
      *

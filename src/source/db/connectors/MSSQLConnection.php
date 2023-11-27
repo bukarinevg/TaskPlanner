@@ -1,28 +1,30 @@
 <?php 
-namespace app\source\db;
+namespace app\source\db\connectors;
 use PDO;
 use PDOException;
+use app\source\db\BaseDBConnectionInterface;
+use app\source\db\DBConnectionInterface;
 
 /**
- * Class PostgreSQLConnection
+ * Class MSSQLConnection
  *
- * This class is responsible for establishing and managing a connection to a PostgreSQL database.
- * It extends the BaseDBConnection class and implements the DBConnection interface.
+ * This class is responsible for establishing and managing a connection to a Microsoft SQL Server database.
+ * It extends the BaseDBConnectionInterface class and implements the DBConnectionInterface interface.
  */
-class PostgreSQLConnection  extends BaseDBConnection implements DBConnection
+class MSSQLConnection extends BaseDBConnectionInterface implements DBConnectionInterface
 {
+
     /**
-     * Establishes a connection to the PostgreSQL database.
+     * Establishes a connection to the database.
      *
      * @return PDO|null The PDO connection object if successful, null otherwise.
      */
     public function getConnection()
     {
         $this->connection = null;
-
         try {
             $this->connection = new PDO(
-                'pssql:host=' . $this->host . ';dbname=' . $this->db_name,
+                'sqlsrv:Server=' . $this->host . ';Database=' . $this->db_name,
                 $this->username,
                 $this->password
             );
@@ -31,7 +33,7 @@ class PostgreSQLConnection  extends BaseDBConnection implements DBConnection
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
         }
-
+        
     }
 }
 

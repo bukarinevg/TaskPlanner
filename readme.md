@@ -31,6 +31,8 @@ you can download it [here](https://www.docker.com/products/docker-desktop).
     }
     ```
 3. In n-minutes the string will be moved to ticket table.
+4. PHPMyAdmin is available at http://localhost:8888 with username `root` and password `root`.
+
 
 ## Project Structure
 - `config/` - This directory contains configuration file.
@@ -44,6 +46,7 @@ you can download it [here](https://www.docker.com/products/docker-desktop).
     - `controller/` - This directory contains Abstract Controller Class.
     - `model/` - This directory contains Abstract Model Class.
     - `db/` - This directory contains DataBase settings Classes.
+        - `connectors/` - This directory contains DBConnectionInterface connectors Classes.
     - `http/` - This directory contains Request Handler Classes.
 - `vendor/` - This directory contains the Composer dependencies.
 - `index.php` - This file is the entry point of the application.	
@@ -55,6 +58,23 @@ you can download it [here](https://www.docker.com/products/docker-desktop).
 - `script.php` - The main script that used by cron job.
 - `readme.md` - This file contains the documentation of the project.
 - `LICENSE` - This file contains the license information of the project.
+
+## Database
+
+Tickets are string that added with api.
+
+Table `tickets` contains 3 columns:
+- `id` - The primary key of the table.
+- `code` - The string that was added to the table.
+- `created_at` - The date and time when the string was added to the table.
+
+Table `tasks` perfoms buffer between api and tickets table.
+
+Table `tasks` contains 3 columns:
+- `id` - The primary key of the table.	
+- `code` - The string that was added to the table.
+- `created_at` - The date and time when the string was added to the table.
+- `time_to_run` - The date and time when the string will be moved to ticket table.
 
 ## Contributing
 

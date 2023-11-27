@@ -1,6 +1,9 @@
 <?php
 namespace app\source\db;
 
+use app\source\db\connectors\MySQLConnection;
+use app\source\db\connectors\PostgreSQLConnection;
+use app\source\db\connectors\MSSQLConnection;
 /**
  * Class DataBase
  *
@@ -14,7 +17,7 @@ class DataBase  {
      */
     private $config;
     /**
-     * @var DBConnection $db The database connection object.
+     * @var DBConnectionInterface $db The database connection object.
      */
     public $db;
 
@@ -56,10 +59,10 @@ class DataBase  {
     /**
      * Sets the database connection object.
      *
-     * @param DBConnection $DBConnection The database connection object.
+     * @param DBConnectionInterface $DBConnectionInterface The database connection object.
      */
-    private function setDataBaseConnection(DBConnection $DBConnection) {
-        $this->db = $DBConnection->getConnection();
+    private function setDataBaseConnection(DBConnectionInterface $DBConnectionInterface) {
+        $this->db = $DBConnectionInterface->getConnection();
     }
 
 }

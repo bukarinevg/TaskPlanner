@@ -1,17 +1,17 @@
 <?php 
-namespace app\source\db;
+namespace app\source\db\connectors;
 use PDO;
 use PDOException;
-
+use app\source\db\BaseDBConnectionInterface;
+use app\source\db\DBConnectionInterface;
 /**
- * Class MSSQLConnection
+ * Class MySQLConnection
  *
- * This class is responsible for establishing and managing a connection to a Microsoft SQL Server database.
- * It extends the BaseDBConnection class and implements the DBConnection interface.
+ * This class is responsible for establishing and managing a connection to a MySQL database.
+ * It extends the BaseDBConnectionInterface class and implements the DBConnectionInterface interface.
  */
-class MSSQLConnection extends BaseDBConnection implements DBConnection
+class MySQLConnection  extends BaseDBConnectionInterface implements DBConnectionInterface
 {
-
     /**
      * Establishes a connection to the database.
      *
@@ -22,7 +22,7 @@ class MSSQLConnection extends BaseDBConnection implements DBConnection
         $this->connection = null;
         try {
             $this->connection = new PDO(
-                'sqlsrv:Server=' . $this->host . ';Database=' . $this->db_name,
+                'mysql:host=' . $this->host . ';dbname=' . $this->db_name,
                 $this->username,
                 $this->password
             );
@@ -31,7 +31,6 @@ class MSSQLConnection extends BaseDBConnection implements DBConnection
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
         }
-        
     }
 }
 
