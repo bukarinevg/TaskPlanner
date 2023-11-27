@@ -20,15 +20,14 @@ class DataBase  {
      */
     /**
      * @var DBConnectionInterface $db The database connection object.
-     */
-    public $db;
+     */    #[SensitiveParameter] public $db;
 
     /**
      * DataBase constructor.
      *
      * @param array $config The configuration array containing the database connection details.
      */
-    public function __construct(private array $config) {
+    public function __construct(#[SensitiveParameter] private array  $config) {
         $this->connect();
     }
     

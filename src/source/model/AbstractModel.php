@@ -12,7 +12,7 @@ abstract class AbstractModel {
     /**
      * @var \PDO $db The PDO connection object.
      */
-    protected $db;
+    #[SensitiveParameter] protected $db;
 
     /**
      * The name of the database table for model.

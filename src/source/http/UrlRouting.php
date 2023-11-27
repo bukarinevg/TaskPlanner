@@ -13,7 +13,7 @@ class UrlRouting  extends Url{
     /**
      * @var string CONTROLLER_NAMESPACE The namespace for the controllers.
      */
-    const CONTROLLER_NAMESPACE = 'app\controllers\\';
+    #[SensitiveParameter] const CONTROLLER_NAMESPACE = 'app\controllers\\';
 
     /**
      * Constructor for the UrlRouting class.

@@ -8,7 +8,7 @@ after number of minutes the string will be moved to ticket table.
 ## Features
 
 - Create row in a table in n minutes.
-- In project used MVC pattern, Rest API, Cron, Docker, Apache, MySQL, Composer,
+- In project used PHP-8, MVC pattern, Rest API, Cron, Docker, Apache, MySQL, Composer,
     OOP, SOLID principles, PSR-4 for autoloading  and  PSR-7 symphony class for handling request.
 
 ## Installation

@@ -10,6 +10,15 @@ use PDO;
  * It defines common properties and a constructor that are shared by all database connection classes.
  */
 abstract class AbstractDBConnection {
+
+    /**
+     * The default values for the database connection properties.
+     */
+    const DEFAULT_HOST = 'localhost';
+    const DEFAULT_DB_NAME = 'database';
+    const DEFAULT_USERNAME = 'username';
+    const DEFAULT_PASSWORD = 'password';
+    
     /**
      * @var string $host The hostname of the database server.
      */    
@@ -28,14 +37,14 @@ abstract class AbstractDBConnection {
     /**
      * @var PDO $connection The PDO connection object.
      */
-    protected PDO $connection;
+    #[SensitiveParameter] protected PDO $connection;
 
     /**
      * AbstractDBConnection constructor.
      *
      * @param array $config The configuration array containing host, database name, username, and password.
      */
-    public function __construct( protected string $host = 'localhost', protected string $db_name = 'database', 
-        protected string $username = 'username', protected string $password = 'password',        ){ }
+    public function __construct(#[SensitiveParameter] protected string $host = self::DEFAULT_HOST, #[SensitiveParameter] protected string $db_name =self::DEFAULT_DB_NAME, 
+    #[SensitiveParameter] protected string $username = self::DEFAULT_USERNAME, #[SensitiveParameter] protected string $password = self::DEFAULT_PASSWORD, ){ }
 }
 ?>
