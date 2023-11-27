@@ -76,6 +76,14 @@ Table `tasks` contains 3 columns:
 - `created_at` - The date and time when the string was added to the table.
 - `time_to_run` - The date and time when the string will be moved to ticket table.
 
+To run queries, you can use classes that inheritad from the class `AbstaractModel`.
+The child class must have a property `$table` with the name of the table.
+The child class may have method `validate()` that validate data before insert to table, it takes inserting data as argument, return true if data validated.]
+In charge of connection and running queries is the class `DataBase`.
+That class is called by AbrstaractModel child classes when there is need to run query.
+
+Log  
+
 ## Contributing
 
 Contributions are welcome! Please follow the guidelines in [CONTRIBUTING.md](./CONTRIBUTING.md) to contribute to this project.

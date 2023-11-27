@@ -12,6 +12,9 @@ use app\source\db\connectors\MSSQLConnection;
  */
 class DataBase  {
 
+    use QueryBuilderTrait {
+		insert as traitInsert;
+	}
     /**
      * @var array $config The configuration array containing the database connection details.
      */
@@ -31,6 +34,13 @@ class DataBase  {
         $this->connect();
         
     }
+    
+    public function insert($table, $columns, $requestDictionary){
+        $query = $this->traitInsert($table , $columns);
+        $query = $this->db->prepare($query);
+        $query->execute($requestDictionary);
+
+    } 
 
     /**
      * Establishes a connection to the database based on the provided configuration.

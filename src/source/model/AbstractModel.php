@@ -9,9 +9,6 @@ use app\source\db\QueryBuilderTrait;
  */
 abstract class AbstractModel {
 
-    use QueryBuilderTrait {
-		insert as traitInsert;
-	}
     /**
      * @var PDO $db The PDO connection object.
      */
@@ -30,7 +27,7 @@ abstract class AbstractModel {
      */
     public function __construct() {
         $config = require 'config/config.php';
-        $this->db =  (new DataBase($config['components']['db']))->db;
+        $this->db =  (new DataBase($config['components']['db']));
     }
 
     /**
@@ -55,9 +52,7 @@ abstract class AbstractModel {
     public function insert(array $columns , array $values ){
         $requestDictionary = array_combine($columns, $values);
         if($this->validate($requestDictionary)){
-            $query = $this->traitInsert($this->table , $columns);
-            $query = $this->db->prepare($query);
-            $query->execute($requestDictionary);
+            $this->db->insert($this->table , $columns, $requestDictionary);
         }
         else{
             throw new \Exception("Data is not valid");
