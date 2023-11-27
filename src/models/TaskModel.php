@@ -18,21 +18,18 @@ class TaskModel  extends \app\source\model\AbstractModel{
      * @return void
      */
 
-    protected function validate($columns){
+    protected function validate($columns) : bool|\Exception{
         $code = $columns['code'];
         $time_to_run = $columns['time_to_run'];
 
         if( strtotime($time_to_run)  <  time() ){
             throw new \Exception("Time to run is wrong");
-            return false;
         }
         else if(empty($code)){
             throw new \Exception("Code cannot be empty");
-            return false;
         }
         else if(strlen($code) > 255){
             throw new \Exception("Code cannot be longer than 255 characters");
-            return false;
         }
         else return true;
         

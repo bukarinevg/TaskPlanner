@@ -27,7 +27,7 @@ class UrlRouting  extends Url{
      *
      * @return array An array containing the controller and method.
      */
-    public function getController() {
+    public function getController(): array {
         $url = $this->getPath();
         $url = explode('/', ltrim( $url, '/'));
   
@@ -52,7 +52,7 @@ class UrlRouting  extends Url{
      * @param string $url The URL.
      * @return string The controller name.
      */
-    private function getControllerName($url = null) {
+    private function getControllerName($url = null): string {
         return self::CONTROLLER_NAMESPACE . ( $url ? ucfirst($url) : 'Default' ). 'Controller';
     }
 
@@ -62,7 +62,7 @@ class UrlRouting  extends Url{
      * @param string $url The URL.
      * @return string The method name.
      */
-    private function getMethodName($url = null) {
+    private function getMethodName($url = null): string {
         return 'action' . ( $url ? ucfirst($url) : 'Index' );
     }
 }

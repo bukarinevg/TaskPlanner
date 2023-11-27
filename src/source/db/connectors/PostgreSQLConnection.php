@@ -16,9 +16,9 @@ class PostgreSQLConnection  extends AbstractDBConnection implements DBConnection
     /**
      * Establishes a connection to the PostgreSQL database.
      *
-     * @return PDO|null The PDO connection object if successful, null otherwise.
+     * @return PDO|PDOException The PDO connection object if successful, null otherwise.
      */
-    public function getConnection()
+    public function getConnection():  PDO | PDOException
     {
         $this->connection = null;
 
@@ -32,6 +32,7 @@ class PostgreSQLConnection  extends AbstractDBConnection implements DBConnection
             return $this->connection;
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
+            throw $e;
         }
 
     }

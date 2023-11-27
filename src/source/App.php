@@ -13,8 +13,6 @@ class App
     /**
      * @var array $config The application configuration.
      */
-    private $config;
-
 
     /**
      * @var mixed $request The request object.
@@ -26,11 +24,7 @@ class App
      *
      * @param array $config The configuration options for the App.
      */
-    function __construct($config )
-    {
-        $this->config = $config;
-        
-    }
+    function __construct(private array $config){}
 
     /**
      * Runs the application.
@@ -70,7 +64,7 @@ class App
     /**
      * Get the value of request
      */ 
-    public function getRequest()
+    public function getRequest(): RequestHandler
     {
         return $this->request;
     }
@@ -78,11 +72,12 @@ class App
     /**
      * Set the value of request
      *
-     * @return  self
+     * Handles the request.
+     * @return  void
      */ 
-    public function setRequest(RequestHandler $requestHandler)
+    public function setRequest(RequestHandler $requestHandler): void
     {
         $this->request = $requestHandler;
-        return $this;
+
     }
 }

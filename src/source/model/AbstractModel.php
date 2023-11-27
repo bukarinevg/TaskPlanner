@@ -10,7 +10,7 @@ use app\source\db\QueryBuilderTrait;
 abstract class AbstractModel {
 
     /**
-     * @var PDO $db The PDO connection object.
+     * @var \PDO $db The PDO connection object.
      */
     protected $db;
 
@@ -35,7 +35,7 @@ abstract class AbstractModel {
      * if the data is valid, returns true, otherwise throws an exception.
      * if validate method is not implemented in the child class, returns true.
      */
-    protected function validate($columns){
+    protected function validate(array $columns): bool|\Exception{
         return true;
     }
 
@@ -47,12 +47,13 @@ abstract class AbstractModel {
      *
      * @param array $columns The columns to insert data into.
      * @param array $values The values to be inserted.
-     * @return void
+     * @return bool|\Exception Returns true if the data is valid and inserted, otherwise throws an exception.
      */
-    public function insert(array $columns , array $values ){
+    public function insert(array $columns , array $values ): bool|\Exception {
         $requestDictionary = array_combine($columns, $values);
         if($this->validate($requestDictionary)){
             $this->db->insert($this->table , $columns, $requestDictionary);
+            return true;
         }
         else{
             throw new \Exception("Data is not valid");

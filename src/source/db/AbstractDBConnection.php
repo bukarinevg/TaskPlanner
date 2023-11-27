@@ -1,5 +1,8 @@
 <?php
 namespace app\source\db;
+
+use PDO;
+
 /**
  * Class AbstractDBConnection
  *
@@ -9,35 +12,30 @@ namespace app\source\db;
 abstract class AbstractDBConnection {
     /**
      * @var string $host The hostname of the database server.
-     */
-    protected $host;
-    
+     */    
     /**
      * @var string $db_name The name of the database.
      */
-    protected $db_name;
     
     /**
      * @var string $username The username used to connect to the database.
      */
-    protected $username;
 
     /**
      * @var string $password The password used to connect to the database.
      */
-    protected $password;
     
     /**
      * @var PDO $connection The PDO connection object.
      */
-    protected $connection;
 
     /**
      * AbstractDBConnection constructor.
      *
      * @param array $config The configuration array containing host, database name, username, and password.
      */
-    public function __construct($config)
+    public function __construct($config = ['localhost', 'database', 'username', 'password'],  protected string $host = 'localhost', protected string $db_name = 'database',  
+    protected string $username = 'username', protected string $password = 'password')
     {
         $this->host = $config['host'];
         $this->db_name = $config['db_name'];

@@ -1,6 +1,7 @@
 <?php
 namespace app\source\db; 
-
+use PDO;
+use PDOException;
 /**
  * Constructs an SQL delete query.
  *
@@ -12,8 +13,8 @@ interface DBConnectionInterface{
     /**
      * Establishes a connection to the database.
      *
-     * @return mixed The database connection object.
+     * @return  PDO|PDOException The database connection object.
      */
-    public function getConnection();
+    public function getConnection() : PDO | PDOException;
 }
 ?>

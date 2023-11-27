@@ -15,7 +15,7 @@ class RequestHandler {
     /**
      * @var Request $request The request object.
      */
-    private $request;
+    private Request $request;
 
     /**
      * Constructor for the RequestHandler class.
@@ -30,7 +30,7 @@ class RequestHandler {
      * @param string $name The name of the GET parameter.
      * @return mixed|null The value of the GET parameter if found, null otherwise.
      */
-    public function getGetParram($name) {
+    public function getGetParram($name): Request {
        return $this->getRequest()->query->get($name);
     }
 
@@ -39,9 +39,12 @@ class RequestHandler {
      *
      * @return mixed The content of the request.
      */
-    public function getContent() {
+    public function getContent(): array | string | null {
         if($this->isJson($this->request->getContent())){
             return $this->request->toArray();
+        }
+        else {
+           return null;
         }
     }
 
@@ -51,7 +54,7 @@ class RequestHandler {
      * @param string $string The string to be checked.
      * @return bool Returns true if the string is a valid JSON, false otherwise.
      */
-    function isJson($string) {
+    function isJson($string): bool {
         json_decode($string);
         return json_last_error() === JSON_ERROR_NONE;
      }
@@ -61,7 +64,7 @@ class RequestHandler {
      * 
      * @return mixed The request .
      */ 
-    public function getRequest()
+    public function getRequest() : Request
     {
         return $this->request;
     }
@@ -72,7 +75,7 @@ class RequestHandler {
      *
      * @return  self
      */ 
-    public function setRequest(Request $request)
+    public function setRequest(Request $request) : RequestHandler
     {
         $this->request = $request;
 

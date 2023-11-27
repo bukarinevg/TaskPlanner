@@ -27,7 +27,7 @@ class Url {
      *
      * @param array $server The server array.
      */
-    public function __construct( $server) {
+    public function __construct(array $server) {
         $this->protocol = isset($server['HTTPS']) && $server['HTTPS'] === 'on' ? "https" : "http";
         $this->host = $server['HTTP_HOST'];
         $this->path = parse_url($server['REQUEST_URI'], PHP_URL_PATH);
@@ -39,7 +39,7 @@ class Url {
      *
      * @return string The protocol of the URL.
      */
-    public function getProtocol() {
+    public function getProtocol(): string {
         return $this->protocol;
     }
 
@@ -48,7 +48,7 @@ class Url {
      *
      * @return string The host of the URL.
      */
-    public function getHost() {
+    public function getHost(): string {
         return $this->host;
     }
 
@@ -57,7 +57,7 @@ class Url {
      *
      * @return string The path of the URL.
      */
-    public function getPath() {
+    public function getPath(): string  {
         return $this->path;
     }
 
@@ -66,7 +66,7 @@ class Url {
      *
      * @return string The query of the URL.
      */
-    public function getQuery() {
+    public function getQuery(): array {
         return $this->query;
     }
 
@@ -75,7 +75,7 @@ class Url {
      *
      * @return string The URL as a string.
      */
-    public function __toString() {
+    public function __toString(): string {
         $url = $this->protocol . '://' . $this->host . $this->path;
         if (!empty($this->query)) {
             $url .= '?' . http_build_query($this->query);

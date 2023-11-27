@@ -19,7 +19,7 @@ class MSSQLConnection extends AbstractDBConnection implements DBConnectionInterf
      *
      * @return PDO|null The PDO connection object if successful, null otherwise.
      */
-    public function getConnection()
+    public function getConnection():  PDO | PDOException
     {
         $this->connection = null;
         try {
@@ -32,6 +32,7 @@ class MSSQLConnection extends AbstractDBConnection implements DBConnectionInterf
             return $this->connection;
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
+            throw $e;
         }
         
     }

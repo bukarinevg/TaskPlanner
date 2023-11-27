@@ -12,8 +12,8 @@ class DefaultController extends \app\source\controller\AbstractController
      * This method is the index action of the DefaultController.
      * It is responsible for rendering the homepage of the application.
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
-        echo 'DefaultController index';
+        return 'DefaultController index';
     }
 }

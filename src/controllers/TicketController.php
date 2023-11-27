@@ -14,12 +14,11 @@ class TicketController  extends \app\source\controller\AbstractController{
      *
      * This method creates a new task with the provided code and minutes.
      */
-    public function actionPut() {
+    public function actionPut():void {
         $request = $this->app->getRequest();
         $data = $request->getContent();
         $minutes = $data['min'];
         $code = $data['code']; 
-
         $task = new TaskModel();
         $task->insert(['code', 'time_to_run', 'created_at'], [$code, $task->calculateTime($minutes),  date('Y-m-d H:i:s') ]);
     }

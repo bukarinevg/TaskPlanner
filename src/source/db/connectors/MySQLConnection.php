@@ -15,21 +15,21 @@ class MySQLConnection  extends AbstractDBConnection implements DBConnectionInter
     /**
      * Establishes a connection to the database.
      *
-     * @return PDO|null The PDO connection object if successful, null otherwise.
+     * @return PDO|PDOException The PDO connection object if successful, null otherwise.
      */
-    public function getConnection()
+    public function getConnection(): PDO | PDOException
     {
-        $this->connection = null;
         try {
-            $this->connection = new PDO(
+            $connection = new PDO(
                 'mysql:host=' . $this->host . ';dbname=' . $this->db_name,
                 $this->username,
                 $this->password
             );
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $this->connection;
+            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $connection;
         } catch (PDOException $e) {
             echo 'Connection Error: ' . $e->getMessage();
+            throw $e;
         }
     }
 }
