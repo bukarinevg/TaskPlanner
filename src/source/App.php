@@ -8,7 +8,7 @@ use app\source\http\UrlRouting;
 /**
  * This is the main application class.
  */
-class App
+readonly class App
 {
     /**
      * @var array $config The application configuration.
@@ -17,7 +17,7 @@ class App
     /**
      * @var mixed $request The request object.
      */
-    private $request;
+    private RequestHandler $request;
 
     /**
      * App constructor.
