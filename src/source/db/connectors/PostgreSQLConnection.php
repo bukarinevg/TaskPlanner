@@ -2,16 +2,16 @@
 namespace app\source\db\connectors;
 use PDO;
 use PDOException;
-use app\source\db\BaseDBConnectionInterface;
+use app\source\db\AbstractDBConnection;
 use app\source\db\DBConnectionInterface;
 
 /**
  * Class PostgreSQLConnection
  *
  * This class is responsible for establishing and managing a connection to a PostgreSQL database.
- * It extends the BaseDBConnectionInterface class and implements the DBConnectionInterface interface.
+ * It extends the AbstractDBConnection class and implements the DBConnectionInterface interface.
  */
-class PostgreSQLConnection  extends BaseDBConnectionInterface implements DBConnectionInterface
+class PostgreSQLConnection  extends AbstractDBConnection implements DBConnectionInterface
 {
     /**
      * Establishes a connection to the PostgreSQL database.

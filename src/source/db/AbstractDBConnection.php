@@ -1,12 +1,12 @@
 <?php
 namespace app\source\db;
 /**
- * Class BaseDBConnectionInterface
+ * Class AbstractDBConnection
  *
  * This abstract class provides a base for establishing and managing a connection to a database.
  * It defines common properties and a constructor that are shared by all database connection classes.
  */
-abstract class BaseDBConnectionInterface {
+abstract class AbstractDBConnection {
     /**
      * @var string $host The hostname of the database server.
      */
@@ -33,7 +33,7 @@ abstract class BaseDBConnectionInterface {
     protected $connection;
 
     /**
-     * BaseDBConnectionInterface constructor.
+     * AbstractDBConnection constructor.
      *
      * @param array $config The configuration array containing host, database name, username, and password.
      */

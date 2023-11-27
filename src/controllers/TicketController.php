@@ -1,7 +1,7 @@
 <?php
 namespace app\controllers;
 
-use app\models\Task;
+use app\models\TaskModel;
 
 /**
  * Class TicketController
@@ -20,8 +20,10 @@ class TicketController  extends \app\source\controller\AbstractController{
         $minutes = $data['min'];
         $code = $data['code']; 
 
-        $job = new Task();
-        $job->create( $code, $minutes);
+        $task = new TaskModel();
+        $task->insert(['code', 'time_to_run', 'created_at'], [$code, $task->calculateTime($minutes),  date('Y-m-d H:i:s') ]);
     }
+
+    
 
 }

@@ -2,15 +2,15 @@
 namespace app\source\db\connectors;
 use PDO;
 use PDOException;
-use app\source\db\BaseDBConnectionInterface;
+use app\source\db\AbstractDBConnection;
 use app\source\db\DBConnectionInterface;
 /**
  * Class MySQLConnection
  *
  * This class is responsible for establishing and managing a connection to a MySQL database.
- * It extends the BaseDBConnectionInterface class and implements the DBConnectionInterface interface.
+ * It extends the AbstractDBConnection class and implements the DBConnectionInterface interface.
  */
-class MySQLConnection  extends BaseDBConnectionInterface implements DBConnectionInterface
+class MySQLConnection  extends AbstractDBConnection implements DBConnectionInterface
 {
     /**
      * Establishes a connection to the database.

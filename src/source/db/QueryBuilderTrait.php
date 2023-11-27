@@ -15,9 +15,9 @@ trait QueryBuilderTrait {
      * @param array $values The values to insert.
      * @return string The SQL query.
      */
-    public function insert(string $table, array $columns, array $values): string {
+    public function insert(string $table, array $columns): string {
         // Implement the insert method here
-        return 'INSERT INTO ' . $table . ' (' . implode(', ', $columns) . ') VALUES (' . implode(', ', $values) . ')';
+        return 'INSERT INTO ' . $table . ' (' . implode(', ', $columns) . ') VALUES (:' . implode(', :', $columns) . ')';
     }
 
     /**
