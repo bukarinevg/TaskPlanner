@@ -1,5 +1,8 @@
 <?php 
 namespace app\models;
+
+use app\source\attribute\validation\TypeAttribute;
+
 /**
  * This class represents a TaskModel.
  */
@@ -8,7 +11,25 @@ class TaskModel  extends \app\source\model\AbstractModel{
     /**
      * The name of the database table for model.
      */
-    public $table = 'task';
+    public string $table = 'task';
+
+    /**
+     * The fields for model.
+     */
+    public array $fields =  [
+        'code',
+        'minutes',
+    ];
+
+    /**
+     * Validates the data of the model.
+    */
+    #[TypeAttribute('string')]
+    public string $code;
+    #[TypeAttribute('integer')]
+    public int $minutes;
+
+    
 
     /**
      * Validates the given input.

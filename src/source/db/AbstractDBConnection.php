@@ -37,14 +37,16 @@ abstract class AbstractDBConnection {
     /**
      * @var PDO $connection The PDO connection object.
      */
-    #[SensitiveParameter] protected PDO $connection;
+    protected PDO $connection;
 
     /**
      * AbstractDBConnection constructor.
      *
      * @param array $config The configuration array containing host, database name, username, and password.
      */
-    public function __construct(#[SensitiveParameter] protected string $host = self::DEFAULT_HOST, #[SensitiveParameter] protected string $db_name =self::DEFAULT_DB_NAME, 
-    #[SensitiveParameter] protected string $username = self::DEFAULT_USERNAME, #[SensitiveParameter] protected string $password = self::DEFAULT_PASSWORD, ){ }
+    public function __construct(
+        #[\SensitiveParameter] protected string $host = self::DEFAULT_HOST, 
+        #[\SensitiveParameter] protected string $db_name =self::DEFAULT_DB_NAME, 
+        #[\SensitiveParameter] protected string $username = self::DEFAULT_USERNAME, 
+        #[\SensitiveParameter] protected string $password = self::DEFAULT_PASSWORD, ){ }
 }
-?>

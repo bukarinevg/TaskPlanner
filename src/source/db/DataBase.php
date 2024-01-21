@@ -4,6 +4,8 @@ namespace app\source\db;
 use app\source\db\connectors\MySQLConnection;
 use app\source\db\connectors\PostgreSQLConnection;
 use app\source\db\connectors\MSSQLConnection;
+use PDO;
+
 /**
  * Class DataBase
  *
@@ -15,19 +17,18 @@ class DataBase  {
     use QueryBuilderTrait {
 		insert as traitInsert;
 	}
+
     /**
-     * @var array $config The configuration array containing the database connection details.
-     */
-    /**
-     * @var DBConnectionInterface $db The database connection object.
-     */    #[SensitiveParameter] public $db;
+     * @var PDO  $db The database connection object.
+     */    
+    public PDO $db;
 
     /**
      * DataBase constructor.
      *
      * @param array $config The configuration array containing the database connection details.
      */
-    public function __construct(#[SensitiveParameter] private array  $config) {
+    public function __construct(#[\SensitiveParameter] private array  $config) {
         $this->connect();
     }
     
@@ -74,8 +75,8 @@ class DataBase  {
      *
      * @param DBConnectionInterface $DBConnectionInterface The database connection object.
      */
-    private function setDataBaseConnection(DBConnectionInterface $DBConnectionInterface): \PDO|\Exception {
-        return $this->db = $DBConnectionInterface->getConnection() ??  throw new \Exception("Error connecting to the database.");
+    private function setDataBaseConnection(DBConnectionInterface $connection): PDO|\Exception {
+        return $this->db = $connection->getConnection() ??  throw new \Exception("Error connecting to the database.");
     }
 
 }

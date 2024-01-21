@@ -18,6 +18,7 @@ class PostgreSQLConnection  extends AbstractDBConnection implements DBConnection
      *
      * @return PDO|PDOException The PDO connection object if successful, null otherwise.
      */
+    #[\Override]
     public function getConnection():  PDO | PDOException
     {
         $this->connection = null;
