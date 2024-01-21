@@ -1,6 +1,7 @@
 <?php 
 namespace app\models;
 
+use app\source\attribute\validation\LengthAttribute;
 use app\source\attribute\validation\TypeAttribute;
 
 /**
@@ -25,8 +26,10 @@ class TaskModel  extends \app\source\model\AbstractModel{
      * Validates the data of the model.
     */
     #[TypeAttribute('string')]
+    #[LengthAttribute(3, 255)]
     public string $code;
     #[TypeAttribute('integer')]
+    #[LengthAttribute(1, 3)]
     public int $minutes;
 
     
