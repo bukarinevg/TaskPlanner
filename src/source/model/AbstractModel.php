@@ -1,8 +1,11 @@
 <?php 
 namespace app\source\model;
 
+use app\source\attribute\validation\AttributeValidationResource;
 use app\source\db\DataBase;
 use app\source\db\QueryBuilderTrait;
+use app\source\http\RequestHandler;
+use Exception;
 
 /**
  * This is an abstract class that serves as the base for all models.
@@ -10,14 +13,19 @@ use app\source\db\QueryBuilderTrait;
 abstract class AbstractModel {
 
     /**
-     * @var \PDO $db The PDO connection object.
+     * @var DataBase $db The PDO connection object.
      */
-    #[SensitiveParameter] protected $db;
+    protected DataBase $db;
 
     /**
      * The name of the database table for model.
      */
-    public $table = '';
+    public string $table;
+    
+    /**
+     * The fields for model.
+     */
+    public array $fields;
 
 
     /**
@@ -51,16 +59,29 @@ abstract class AbstractModel {
      */
     public function insert(array $columns , array $values ): bool|\Exception {
         $requestDictionary = array_combine($columns, $values);
-        if($this->validate($requestDictionary)){
+        // if($this->validate($requestDictionary)){
             $this->db->insert($this->table , $columns, $requestDictionary);
             return true;
-        }
-        else{
-            throw new \Exception("Data is not valid");
-        }
+      
+        // }
+        // else{
+        //     throw new \Exception("Data is not valid");
+        // }
+    }
 
+    public function load(RequestHandler $request): null |Exception{
+        $data = $request->getContent();
 
-        
+        foreach($this->fields as $field){
+            if(!isset($data[$field])){
+                throw new \Exception("Field $field is not set");
+            }
+            if(AttributeValidationResource::validateProperty($this::class ,  $field, $data[$field])) $this->$field = $data[$field] ;
+
+        }
+        return null;
+        // print_r($data);die;
+
     }
 
     

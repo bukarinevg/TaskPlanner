@@ -24,7 +24,7 @@ readonly class App
      *
      * @param array $config The configuration options for the App.
      */
-    function __construct(#[SensitiveParameter] private array $config){}
+    function __construct(#[\SensitiveParameter] private  array $config){}
 
     /**
      * Runs the application.
