@@ -18,6 +18,11 @@
             "app\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "test\\": "test/"
+        }
+    },
     "authors": [
         {
             "name": "Bukarin Evgenii",

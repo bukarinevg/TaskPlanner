@@ -1,63 +1,48 @@
 <?php 
 declare(strict_types=1);
 
-namespace Tests\unit;
+namespace test\unit;
 
 use PHPUnit\Framework\TestCase;
 use app\source\attribute\validation\TypeAttribute;
 
 class TypeAttributeTest extends TestCase
 {
-    private TypeAttribute $typeAttribute;
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->typeAttribute = new TypeAttribute('string');
-    }
    
-    public function testTypeAttribute(): void
+    /**
+     * @dataProvider \test\dataProviders\TypeAttributeDataProvider::validType
+     */
+    public function testValidTypeAttribute(mixed $value, string $type ): void
     {
         //given - when - then
         //arrange-act-assert
 
         //given  
-        $typeAttribute = new TypeAttribute('string');
+        $typeAttribute = new TypeAttribute($type);
 
         $expected = True;
         //when 
-        $result = $typeAttribute->validate('test');
+        $result = $typeAttribute->validate($value);
 
         //assert
         $this->assertEquals($expected, $result);
+    }
 
-        $typeAttribute = new TypeAttribute('string');
+    /**
+     * @dataProvider \test\dataProviders\TypeAttributeDataProvider::invalidType
+     */
+    public function testInvalidTypeAttribute(mixed $value, string $type ): void
+    {
+        //given - when - then
+        //arrange-act-assert
+
+        //given  
+        $typeAttribute = new TypeAttribute($type);
 
         $expected = False;
         //when 
-        $result = $typeAttribute->validate(333);
-
+        $result = $typeAttribute->validate($value);
         //assert
         $this->assertEquals($expected, $result);
-
-        $typeAttribute = new TypeAttribute('integer');
-
-        $expected = True;
-        //when 
-        $result = $typeAttribute->validate(333);
-
-        //assert
-        $this->assertEquals($expected, $result);
-
-
-        $typeAttribute = new TypeAttribute('string');
-
-        $expected = False;
-        //when 
-        $result = $typeAttribute->validate([]);
-
-        //assert
-        $this->assertEquals($expected, $result);
-
-
     }
 }

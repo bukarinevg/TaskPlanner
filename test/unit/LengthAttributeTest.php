@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\unit;
+namespace test\unit;
 
 use app\source\attribute\validation\LengthAttribute;
 use PHPUnit\Framework\TestCase;
