@@ -18,10 +18,18 @@
             "app\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "test\\": "test/"
+        }
+    },
     "authors": [
         {
             "name": "Bukarin Evgenii",
             "email": "bukarinevgeni@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "10.5.x-dev"
+    }
 }

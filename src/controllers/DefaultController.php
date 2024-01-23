@@ -14,6 +14,7 @@ class DefaultController extends \app\source\controller\AbstractController
      */
     public function actionIndex(): string
     {
+        echo 'DefaultController index';
         return 'DefaultController index';
     }
 }

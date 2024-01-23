@@ -42,9 +42,9 @@ class LengthAttribute
      * @param string $value The string to validate.
      * @throws \InvalidArgumentException if the string's length is not within the min and max range.
      */
-    public function validate(string $value) : bool
+    public function validate(string|int $value) : bool
     {
-        $length = strlen($value);
+        $length = strlen((string)$value);
         if ($this->min <= $length && $length < $this->max) {
            return True;
         }

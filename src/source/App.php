@@ -40,7 +40,7 @@ readonly class App
      *
      * @param array $route An array containing the controller and method.
      */
-    public function callController($route)
+    public function callController(array $route) 
     {
         try {
             $controller =  $route['controller'];
