@@ -10,6 +10,11 @@ use PDOException;
  * @return string The constructed SQL query.
  */
 interface DBConnectionInterface{
+
+    /**
+     * The type of database.
+     */
+    const DATABASE_TYPE = '';
     /**
      * Establishes a connection to the database.
      *
