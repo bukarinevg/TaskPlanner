@@ -27,6 +27,7 @@ class TicketController  extends \app\source\controller\AbstractController{
         // $code = $data['code']; 
         // print_r($data);
         $task->insert(['code', 'time_to_run', 'created_at'], [$task->code, $task->calculateTime($task->minutes),  date('Y-m-d H:i:s') ]);
+        echo json_encode(['status' => 'success']);
     }
 
     

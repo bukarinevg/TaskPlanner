@@ -4,6 +4,7 @@ namespace app\source\db;
 use app\source\db\connectors\MySQLConnection;
 use app\source\db\connectors\PostgreSQLConnection;
 use app\source\db\connectors\MSSQLConnection;
+use app\source\db\DataBaseFactory;
 use PDO;
 
 /**
@@ -43,29 +44,14 @@ class DataBase  {
      * Establishes a connection to the database based on the provided configuration.
      */
     private function connect(): bool|\Exception {
-        $driver = $this->config['driver'];
-        $dbArguments = array_values([
+        $dbArguments = [
             'host' => $this->config['host'],
+            'driver' => $this->config['driver'],
             'db_name' => $this->config['db_name'],
             'username' => $this->config['username'],
             'password' => $this->config['password']
-        ]);
-
-        switch ($driver) {
-            case 'mysql':
-                $connection = new MySQLConnection(...$dbArguments);
-                break;
-            case 'pgsql':
-                $connection = new PostgreSQLConnection(...$dbArguments);
-                break;
-            case 'sqlite':
-                $connection = new MSSQLConnection(...$dbArguments);
-                break;
-            // Add more cases for other supported drivers
-
-            default:
-                throw new \Exception("Unsupported driver: $driver");
-        }
+        ];
+        $connection = DataBaseFactory::getConnection($dbArguments);
         $this->setDataBaseConnection($connection);
         return true;
     }

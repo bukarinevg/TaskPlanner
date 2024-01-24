@@ -14,6 +14,10 @@ use app\source\db\DBConnectionInterface;
 class PostgreSQLConnection  extends AbstractDBConnection implements DBConnectionInterface
 {
     /**
+     * The type of database.
+     */
+    const DATABASE_TYPE = 'pgsql';
+    /**
      * Establishes a connection to the PostgreSQL database.
      *
      * @return PDO|PDOException The PDO connection object if successful, null otherwise.

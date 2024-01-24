@@ -13,6 +13,10 @@ use app\source\db\DBConnectionInterface;
  */
 class MSSQLConnection extends AbstractDBConnection implements DBConnectionInterface
 {
+    /**
+     * The type of database.
+     */
+    const DATABASE_TYPE = 'mssql';
 
     /**
      * Establishes a connection to the database.
